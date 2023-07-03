@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/blogs/update/__${blog.id}__}" th:object="${blog}" enctype="multipart/form-data" method="post">
+  <input type="text" th:field="*{title}">
+  <input type="text" th:field="*{content}">
+  <input type="file" name="file">
+  <input type="submit" value="Submit">
+</form>
+</body>
+</html>

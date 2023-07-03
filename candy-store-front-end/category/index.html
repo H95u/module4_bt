@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="../js/category-index.js"></script>
+</head>
+<body onload="showAll()">
+<h1 style="text-align: center;">Home category</h1>
+<div class="container" style="text-align: center">
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Create new Category
+    </button>
+    <hr>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create class</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="name">Name</label><br>
+                    <input type="text" id="name">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="addNewCategory()">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myUpdateModal" role="dialog" style="text-align: center">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update category</h4>
+            </div>
+            <div class="modal-body">
+                <label for="name">Name</label><br>
+                <input type="text" id="nameUpdate">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="updateCategory()">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="categoryList"></div>
+<div style="text-align: center ">
+    <a href="http://localhost:63343/candy-store-font-end/product/index.html?_ijt=134mkad166eu8u7me9akl9k7c0&_ij_reload=RELOAD_ON_SAVE">Back
+        to Product</a>
+</div>
+</body>
+</html>

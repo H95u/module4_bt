@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>create category</title>
+</head>
+<body>
+<h1 style="text-align: center">Create category</h1>
+<form th:action="@{/categories/create}" method="post" th:object="${category}">
+  <table border="1" style="margin: auto;text-align: center">
+    <tr>
+      <th>Name</th>
+      <th>
+        <label>
+          <input th:field="*{name}">
+        </label>
+      </th>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button type="submit">Submit</button>
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

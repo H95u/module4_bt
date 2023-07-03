@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>success</h1>
+<img th:src="@{'/static/' + ${img}}" alt="Uploaded Image" style="width: 150px; height: 150px">
+<audio th:src="@{'/static/' + ${audio}}" controls></audio>
+<video th:src="@{'/static/' + ${video}}" controls></video>
+</body>
+</html>

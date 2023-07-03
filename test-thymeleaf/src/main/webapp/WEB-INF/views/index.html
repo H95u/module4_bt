@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+</head>
+<body>
+<h3>Customers</h3>
+<p>
+    <a th:href="@{/customer/create}">
+        Add new customer
+    </a>
+</p>
+
+<table id="customers">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cus : ${customers}">
+        <td th:text="${cus.name}"></td>
+        <td th:text="${cus.email}"></td>
+        <td th:text="${cus.address}"></td>
+        <td><a th:href="@{/customer/{id}/edit(id=${cus.id})}">edit</a></td>
+        <td>
+            <button th:id="${cus.id}" onclick="deleteCustomer(this)" >delete</button>
+        </td>
+        <td><a th:href="@{/customer/{id}/view(id=${cus.id})}">view</a></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+<script>
+    function deleteCustomer(button) {
+        let id = button.getAttribute("id");
+        if (confirm("Xóa?")) {
+            window.location.href = "/customer/" + id + "/delete";
+        }
+    }
+</script>
+</html>
