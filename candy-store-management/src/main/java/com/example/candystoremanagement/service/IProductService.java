@@ -1,4 +1,6 @@
 package com.example.candystoremanagement.service;
 
-public interface IProductService {
+import com.example.candystoremanagement.model.Product;
+
+public interface IProductService extends IGeneralService<Product> {
 }

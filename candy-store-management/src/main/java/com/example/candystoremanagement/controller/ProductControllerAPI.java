@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -63,8 +64,11 @@ public class ProductControllerAPI {
     public ResponseEntity<Product> saveProduct(@RequestParam("data") String productJson,
                                                @RequestParam("file") MultipartFile file) throws IOException {
         Product product = objectMapper.readValue(productJson, Product.class);
-        String filename = file.getOriginalFilename();
-        file.transferTo(new File("D:\\module4\\candy-store-front-end\\file\\" + filename));
+        if (!Objects.equals(file.getOriginalFilename(), "blob")) {
+            String filename = file.getOriginalFilename();
+            product.setImg(filename);
+            file.transferTo(new File("D:\\module4\\candy-store-front-end\\file\\" + filename));
+        }
         return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
     }
 
@@ -75,9 +79,15 @@ public class ProductControllerAPI {
         Optional<Product> productOptional = productService.findById(id);
         if (productOptional.isPresent()) {
             Product product = objectMapper.readValue(productJson, Product.class);
-            String filename = file.getOriginalFilename();
-            product.setId(id);
-            file.transferTo(new File("D:\\module4\\candy-store-front-end\\file\\" + filename));
+            if (Objects.equals(file.getOriginalFilename(), "blob")) {
+                product.setId(id);
+                product.setImg(productOptional.get().getImg());
+            } else {
+                String filename = file.getOriginalFilename();
+                product.setId(id);
+                product.setImg(filename);
+                file.transferTo(new File("D:\\module4\\candy-store-front-end\\file\\" + filename));
+            }
             return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
         } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
@@ -112,7 +122,7 @@ public class ProductControllerAPI {
     }
 
     @GetMapping("/find-price-between")
-    public ResponseEntity<Page<Product>> findPriceBetween(@PageableDefault(value = 5) Pageable pageable,
+    public ResponseEntity<Page<Product>> findPriceBetween(Pageable pageable,
                                                           @RequestParam Double min,
                                                           @RequestParam Double max) {
         Page<Product> products = productService.findPriceBetween(min, max, pageable);
