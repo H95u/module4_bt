@@ -43,4 +43,14 @@ public class ProductService implements IGeneralService<Product> {
     public Optional<Product> findById(Long id) {
         return iProductRepository.findById(id);
     }
+
+    public Page<Product> findPriceBetween(Double minPrice, Double maxPrice, Pageable pageable) {
+        return iProductRepository.findAllByPriceBetween(minPrice, maxPrice, pageable);
+    }
+
+    public Page<Product> findByName(String name, Pageable pageable) {
+        return iProductRepository.searchByName("%" + name + "%", pageable);
+    }
+
+
 }

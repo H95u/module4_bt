@@ -1,5 +1,6 @@
 package com.example.candystoremanagement.controller;
 
+import com.example.candystoremanagement.DTO.CategoryDTO;
 import com.example.candystoremanagement.model.Category;
 import com.example.candystoremanagement.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,18 @@ public class CategoryControllerAPI {
             category.setId(categoryUpdate.get().getId());
             return new ResponseEntity<>(categoryService.save(category), HttpStatus.OK);
         }
+    }
+
+    @GetMapping("/total")
+    public ResponseEntity<Iterable<Double>> findTotalMoney() {
+        List<Double> moneyOfEachCategory = categoryService.getTotalMoneyOfEachCategory();
+        return new ResponseEntity<>(moneyOfEachCategory, HttpStatus.OK);
+    }
+
+    @GetMapping("/total-dto")
+    public ResponseEntity<Iterable<CategoryDTO>> findTotalMoneyDTO() {
+        List<CategoryDTO> moneyOfEachCategory = categoryService.getAllTotalDTO();
+        return new ResponseEntity<>(moneyOfEachCategory, HttpStatus.OK);
     }
 
 }
